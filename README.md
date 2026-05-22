@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/PhillipAmend/shaperbox-importer/actions/workflows/ci.yml/badge.svg)](https://github.com/PhillipAmend/shaperbox-importer/actions/workflows/ci.yml)
 [![Python](https://img.shields.io/badge/python-3.9%2B-blue.svg)](https://www.python.org/downloads/)
-[![License: PolyForm NC 1.0.0](https://img.shields.io/badge/License-PolyForm--NC--1.0.0-orange.svg)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Platform: macOS](https://img.shields.io/badge/platform-macOS-lightgrey.svg)]()
 
 Bulk-import preset packs into Cableguys [ShaperBox 3](https://www.cableguys.com/shaperbox.html) on macOS — without clicking through `Load FXP → Save preset` for every single file.
@@ -124,8 +124,4 @@ This project was built in collaboration with [Claude](https://claude.ai) (Anthro
 
 ## License
 
-[PolyForm Noncommercial License 1.0.0](LICENSE).
-
-In plain English: anyone can use, copy, fork, modify, and redistribute this tool freely for personal, hobby, educational, research, charity, or government use. **You may not use this tool, or any work derived from it, as part of a product or service that you sell or otherwise commercialize.** If that's restrictive for your use case, open an issue and we can talk.
-
-Note: PolyForm Noncommercial is "source-available" / "fair-source" — it is not an [OSI-approved](https://opensource.org/licenses/) open source license because of the commercial-use restriction.
+[MIT](LICENSE) — an [OSI-approved](https://opensource.org/licenses/MIT) permissive open source license. Use it for anything (personal, commercial, in your own product), just keep the copyright notice.

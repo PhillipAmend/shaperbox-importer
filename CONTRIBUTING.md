@@ -28,7 +28,7 @@ The unit tests run without ShaperBox installed (they exercise only the pure form
 
 ## Licensing of contributions
 
-By submitting a contribution (PR, patch, etc.) you agree that your contribution will be licensed under the same [PolyForm Noncommercial License 1.0.0](LICENSE) as the rest of the project.
+By submitting a contribution (PR, patch, etc.) you agree that your contribution will be licensed under the same [MIT License](LICENSE) as the rest of the project.
 
 ## Reporting issues
 
