@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "shaperbox-importer"
-version = "0.1.0"
+version = "0.2.0"
 description = "Bulk-import preset packs into Cableguys ShaperBox 3 on macOS."
 readme = "README.md"
 requires-python = ">=3.9"
@@ -18,8 +18,7 @@ classifiers = [
     "Development Status :: 4 - Beta",
     "Environment :: Console",
     "Intended Audience :: End Users/Desktop",
-    "License :: Free for non-commercial use",
-    "License :: Other/Proprietary License",
+    "License :: OSI Approved :: MIT License",
     "Operating System :: MacOS :: MacOS X",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.9",
