@@ -1,6 +1,6 @@
 # shaperbox-importer
 
-[![CI](https://github.com/phillipamend/shaperbox-importer/actions/workflows/ci.yml/badge.svg)](https://github.com/phillipamend/shaperbox-importer/actions/workflows/ci.yml)
+[![CI](https://github.com/PhillipAmend/shaperbox-importer/actions/workflows/ci.yml/badge.svg)](https://github.com/PhillipAmend/shaperbox-importer/actions/workflows/ci.yml)
 [![Python](https://img.shields.io/badge/python-3.9%2B-blue.svg)](https://www.python.org/downloads/)
 [![License: PolyForm NC 1.0.0](https://img.shields.io/badge/License-PolyForm--NC--1.0.0-orange.svg)](LICENSE)
 [![Platform: macOS](https://img.shields.io/badge/platform-macOS-lightgrey.svg)]()
@@ -36,7 +36,7 @@ pip install shaperbox-importer
 Or from source:
 
 ```sh
-git clone https://github.com/phillipamend/shaperbox-importer
+git clone https://github.com/PhillipAmend/shaperbox-importer
 cd shaperbox-importer
 pip install .
 ```

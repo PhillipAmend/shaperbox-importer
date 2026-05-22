@@ -9,7 +9,7 @@ This tool exists for one job: making it easy to import many ShaperBox 3 presets 
 ## Dev setup
 
 ```sh
-git clone https://github.com/phillipamend/shaperbox-importer
+git clone https://github.com/PhillipAmend/shaperbox-importer
 cd shaperbox-importer
 python3 -m venv .venv
 source .venv/bin/activate

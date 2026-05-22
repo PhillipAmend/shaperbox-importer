@@ -41,9 +41,9 @@ dev = [
 shaperbox-import = "shaperbox_importer.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/phillipamend/shaperbox-importer"
-Issues = "https://github.com/phillipamend/shaperbox-importer/issues"
-Source = "https://github.com/phillipamend/shaperbox-importer"
+Homepage = "https://github.com/PhillipAmend/shaperbox-importer"
+Issues = "https://github.com/PhillipAmend/shaperbox-importer/issues"
+Source = "https://github.com/PhillipAmend/shaperbox-importer"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/shaperbox_importer"]
