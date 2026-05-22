@@ -1,7 +1,9 @@
 # shaperbox-importer
 
+[![PyPI version](https://img.shields.io/pypi/v/shaperbox-importer.svg)](https://pypi.org/project/shaperbox-importer/)
+[![PyPI downloads](https://img.shields.io/pypi/dm/shaperbox-importer.svg)](https://pypi.org/project/shaperbox-importer/)
 [![CI](https://github.com/PhillipAmend/shaperbox-importer/actions/workflows/ci.yml/badge.svg)](https://github.com/PhillipAmend/shaperbox-importer/actions/workflows/ci.yml)
-[![Python](https://img.shields.io/badge/python-3.9%2B-blue.svg)](https://www.python.org/downloads/)
+[![Python](https://img.shields.io/pypi/pyversions/shaperbox-importer.svg)](https://pypi.org/project/shaperbox-importer/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Platform: macOS](https://img.shields.io/badge/platform-macOS-lightgrey.svg)]()
 
@@ -31,6 +33,12 @@ ShaperBox 3 has no built-in bulk import. This tool hosts ShaperBox via [Pedalboa
 
 ```sh
 pip install shaperbox-importer
+```
+
+Or run it once without installing, using [uv](https://docs.astral.sh/uv/):
+
+```sh
+uvx shaperbox-import /path/to/preset/folder
 ```
 
 Or from source:
