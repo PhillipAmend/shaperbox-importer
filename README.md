@@ -118,6 +118,10 @@ Not yet. PRs welcome — see `pack_positions` in the DB.
 **Does it sync to my Cableguys cloud account?**
 The imported presets land in the local sync queue (`state=0`). What Cableguys' server does with them on next sync isn't documented; we observed that they display correctly locally regardless.
 
+## Acknowledgments
+
+This project was built in collaboration with [Claude](https://claude.ai) (Anthropic). The format reverse-engineering, code, tests, and documentation were paired with AI assistance.
+
 ## License
 
 [PolyForm Noncommercial License 1.0.0](LICENSE).

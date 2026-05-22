@@ -9,7 +9,10 @@ description = "Bulk-import preset packs into Cableguys ShaperBox 3 on macOS."
 readme = "README.md"
 requires-python = ">=3.9"
 license = { file = "LICENSE" }
-authors = [{ name = "Phillip Amend" }]
+authors = [
+    { name = "Phillip Amend" },
+    { name = "Claude (Anthropic)" },
+]
 keywords = ["shaperbox", "cableguys", "vst3", "preset", "audio", "music-production"]
 classifiers = [
     "Development Status :: 4 - Beta",
