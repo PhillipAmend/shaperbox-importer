@@ -1,5 +1,7 @@
 # shaperbox-importer
 
+> If this saved you time, consider giving it a ⭐ — it helps others find the tool!
+
 [![PyPI version](https://img.shields.io/pypi/v/shaperbox-importer.svg)](https://pypi.org/project/shaperbox-importer/)
 [![PyPI downloads](https://img.shields.io/pypi/dm/shaperbox-importer.svg)](https://pypi.org/project/shaperbox-importer/)
 [![CI](https://github.com/PhillipAmend/shaperbox-importer/actions/workflows/ci.yml/badge.svg)](https://github.com/PhillipAmend/shaperbox-importer/actions/workflows/ci.yml)
