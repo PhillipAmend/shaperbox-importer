@@ -3,7 +3,7 @@
 > If this saved you time, consider giving it a ⭐ — it helps others find the tool!
 
 [![PyPI version](https://img.shields.io/pypi/v/shaperbox-importer.svg)](https://pypi.org/project/shaperbox-importer/)
-[![PyPI downloads](https://img.shields.io/pypi/dm/shaperbox-importer.svg)](https://pypi.org/project/shaperbox-importer/)
+[![Downloads](https://static.pepy.tech/badge/shaperbox-importer/month)](https://pepy.tech/project/shaperbox-importer)
 [![CI](https://github.com/PhillipAmend/shaperbox-importer/actions/workflows/ci.yml/badge.svg)](https://github.com/PhillipAmend/shaperbox-importer/actions/workflows/ci.yml)
 [![Python](https://img.shields.io/pypi/pyversions/shaperbox-importer.svg)](https://pypi.org/project/shaperbox-importer/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
