@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Native Windows paths and DAW-process detection.
+- CLI overrides for the ShaperBox data folder and VST3 path.
+- `--repair-tags` mode for correcting previously imported preset metadata.
+- Database compatibility checks and atomic `.dat` writes with rollback cleanup.
+
+### Changed
+- Parse the VST3 `Comp` chunk from its chunk list instead of treating the list offset as a size.
+- Reject corrupt or truncated zlib state embedded in `.fst` files.
+- Derive preset-browser module tags from each module's `VISIBLE` state instead of enabling every tag.
+- Require Python 3.10+ and Pedalboard 0.9.25+.
+
 ## [0.2.0]
 
 ### Changed

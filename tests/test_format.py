@@ -15,6 +15,8 @@ from shaperbox_importer.cli import (
     SHAPERBOX_CID,
     cas_path,
     extract_chunk_from_fst,
+    extract_comp_chunk_from_vst3preset,
+    extract_visible_modules,
     find_presets,
     wrap_chunk_as_vst3preset,
 )
@@ -23,6 +25,52 @@ from shaperbox_importer.cli import (
 def _make_chunk(payload: bytes = b"hello world") -> bytes:
     """Build a fake `#zip#` chunk from arbitrary payload."""
     return b"#zip#\x00" + zlib.compress(payload, 9)
+
+
+def _compressed_int(value: int) -> bytes:
+    size = max(1, (value.bit_length() + 7) // 8) if value else 0
+    return bytes([size]) + value.to_bytes(size, "little")
+
+
+def _variant(value: object) -> bytes:
+    if isinstance(value, bool):
+        payload = bytes([2 if value else 3])
+    elif isinstance(value, int):
+        payload = bytes([1]) + struct.pack("<i", value)
+    elif isinstance(value, str):
+        payload = bytes([5]) + value.encode("utf-8") + b"\x00"
+    else:
+        raise TypeError(f"unsupported test variant: {value!r}")
+    return _compressed_int(len(payload)) + payload
+
+
+def _value_tree(
+    node_type: str,
+    properties: dict[str, object] | None = None,
+    children: list[bytes] | None = None,
+) -> bytes:
+    properties = properties or {}
+    children = children or []
+    result = bytearray(node_type.encode("utf-8") + b"\x00")
+    result.extend(_compressed_int(len(properties)))
+    for name, value in properties.items():
+        result.extend(name.encode("utf-8") + b"\x00")
+        result.extend(_variant(value))
+    result.extend(_compressed_int(len(children)))
+    for child in children:
+        result.extend(child)
+    return bytes(result)
+
+
+def _module_state(state_id: str, visible: bool, on: bool = True) -> bytes:
+    return _value_tree(
+        f"{state_id.title()}State",
+        {"id": state_id},
+        [
+            _value_tree("bool", {"id": "VISIBLE", "value": visible}),
+            _value_tree("bool", {"id": "on", "value": on}),
+        ],
+    )
 
 
 class TestExtractChunkFromFst:
@@ -42,6 +90,11 @@ class TestExtractChunkFromFst:
     def test_raises_when_marker_missing(self):
         with pytest.raises(ValueError, match="no #zip# marker"):
             extract_chunk_from_fst(b"FLhd no chunk here at all")
+
+    def test_rejects_truncated_zlib_stream(self):
+        chunk = _make_chunk(b"incomplete")
+        with pytest.raises(ValueError, match="truncated zlib stream"):
+            extract_chunk_from_fst(b"FLhd" + chunk[:-2])
 
 
 class TestWrapChunkAsVst3preset:
@@ -77,6 +130,50 @@ class TestWrapChunkAsVst3preset:
         assert cont_sz == 8
 
 
+class TestExtractCompChunkFromVst3Preset:
+    def test_round_trip_extracts_only_component_data(self):
+        chunk = _make_chunk(b"current ShaperBox state")
+        wrapped = wrap_chunk_as_vst3preset(chunk)
+        assert extract_comp_chunk_from_vst3preset(wrapped) == chunk
+
+    def test_rejects_wrong_class_id(self):
+        wrapped = bytearray(wrap_chunk_as_vst3preset(_make_chunk()))
+        wrapped[8] ^= 1
+        with pytest.raises(ValueError, match="class ID"):
+            extract_comp_chunk_from_vst3preset(bytes(wrapped))
+
+
+class TestExtractVisibleModules:
+    def test_uses_visible_flag_and_db_tag_order(self):
+        state = _value_tree(
+            "PluginState",
+            {"version": "75"},
+            [
+                _module_state("filter", True, on=False),
+                _module_state("time", False, on=True),
+                _module_state("dynamics", True),
+                _module_state("pitch", True),
+            ],
+        )
+        chunk = _make_chunk(state)
+        assert extract_visible_modules(chunk) == "pitch,filter,compressor"
+
+    def test_allows_preset_with_no_visible_modules(self):
+        state = _value_tree("PluginState", children=[_module_state("time", False)])
+        assert extract_visible_modules(_make_chunk(state)) == ""
+
+    def test_rejects_non_value_tree_payload(self):
+        with pytest.raises(ValueError, match="JUCE"):
+            extract_visible_modules(_make_chunk(b"not a ValueTree"))
+
+    def test_rejects_chunk_outside_data_section(self):
+        wrapped = bytearray(wrap_chunk_as_vst3preset(_make_chunk()))
+        list_off = struct.unpack_from("<Q", wrapped, 40)[0]
+        struct.pack_into("<Q", wrapped, list_off + 12, list_off + 1)
+        with pytest.raises(ValueError, match="chunk bounds"):
+            extract_comp_chunk_from_vst3preset(bytes(wrapped))
+
+
 class TestFindPresets:
     def test_finds_vstpreset_and_fst_recursively(self, tmp_path):
         (tmp_path / "a.vstpreset").write_bytes(b"")
@@ -88,6 +185,10 @@ class TestFindPresets:
         out = find_presets(tmp_path)
         names = sorted(p.name for p in out)
         assert names == ["a.vstpreset", "b.fst", "c.vstpreset"]
+
+    def test_extension_matching_is_case_insensitive(self, tmp_path):
+        (tmp_path / "upper.FST").write_bytes(b"")
+        assert find_presets(tmp_path) == [tmp_path / "upper.FST"]
 
     def test_returns_empty_for_empty_dir(self, tmp_path):
         assert find_presets(tmp_path) == []
